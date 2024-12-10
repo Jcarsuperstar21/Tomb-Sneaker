@@ -1,5 +1,6 @@
 
 public class Entity {
+//initializes member variables for the entity
 private String name;
 private double baseDmg;
 private double maxHp;
@@ -7,8 +8,9 @@ public double currentHp;
 private double dmgReduce;
 private boolean blocking;
 private double difficulty;
+//creates a randomizer for simpler number generation
 private Randomize rando = new Randomize();
-
+//creates an object of entity with default values
 public Entity(){
     this.name = "Entity";
     this.baseDmg = 3;
@@ -17,7 +19,14 @@ public Entity(){
     this.dmgReduce = 2;
     this.difficulty = 1;
 }
-//create el entity
+//creates an enntity with the given parameters
+//ONLY ACCEPTED 'name' INPUTS:
+/*
+Skeleton
+Spitter
+Zombie
+Golem
+*/
 public Entity(String name, double diff){
     this();
     this.name = name;
@@ -44,7 +53,9 @@ public Entity(String name, double diff){
     }
 }
 
-
+//randomly chooses if the entity should block or attack
+//blocking will be set to 'false' if the entity decides to attack 
+//blocking will be set to 'true' if the entity decides to block
 public void chooseTurn(){
     if(rando.getRandomInclusive(0,1) == 1){
         System.out.println("The " + name + " gets ready to block the next attack!");
@@ -53,14 +64,16 @@ public void chooseTurn(){
         blocking = false; // attacking
     }
 }
+//returns true if the entity is blocking
+//returns false if the entity is attacking
 public boolean isBlocking(){
     return blocking;
 }
-//returns damage base damage deal
+//returns base damage dealt by an attack
 public double attack(){
     return baseDmg;
 }
-//returns reduced damage after a block turn
+//returns reduced damage after a block turn (could be private)
 public double reduceDmg(double damageRecieved){
     if(damageRecieved - this.dmgReduce < 0) {
         return 0;
